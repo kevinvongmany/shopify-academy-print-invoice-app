@@ -67,6 +67,123 @@ function orderPage(docType, order) {
 
 function printHTML(pages) {
     const title = `<title>Print Order Invoice</title>`;
+    const pageBreak = `<div class="page-break"></div>`;
+    const pageBreakStyles = `
+    @media not print {
+            .page-break {
+                width: 100vw;
+                height: 40px;
+                background-color: lightgray;
+            }
+        }
+        @media print {
+            .page-break {
+                page-break-after: always;
+            }
+        }`;
 
-    return null
+    const joinedPages = pages.join(pageBreak);
+    
+    return `<!DOCTYPE html>
+    <html lang="en">
+    <head>
+        <style>
+        body,html {
+            font-size: 16px;
+            line-height: normal;
+            background: none;
+            margin: 0;
+            padding: 0;
+            font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+        }
+        body {
+            font-size: 0.688rem;
+            color: #000;
+        }
+        main {
+            padding: 3rem 2rem;
+            height: 100vh;
+        }
+        h1 {
+            font-size: 2.5rem;
+            margin: 0;
+        }
+        h2,h3 {
+            font-size: 0.75rem;
+            font-weight: bold;
+        }
+        h2,h3,p {
+            margin: 1rem 0 0.5rem 0;
+        }
+        .address p {
+            margin: 0;
+        }
+        b,strong {
+            font-weight: bold;
+        }
+        .columns {
+            display: grid;
+            grid-auto-columns: minmax(0, 1fr);
+            grid-auto-flow: column;
+            word-break: break-word;
+        }
+        hr {
+            clear: both;
+            overflow: hidden;
+            margin: 1.5em 0;
+            border-top: 1px solid #000;
+            border-bottom: none;
+        }
+        .header-row+.row {
+            margin-top: 0px;
+        }
+        .header-row {
+            display: none !important;
+        }
+        table,td,th {
+            width: auto;
+            border-spacing: 0;
+            border-collapse: collapse;
+            font-size: 1em;
+        }
+        td,th {
+            border-bottom: none;
+        }
+        table.table-tabular,.table-tabular {
+            border: 1px solid #e3e3e3;
+            margin: 0 0 0 0;
+            width: 100%;
+            border-spacing: 0;
+            border-collapse: collapse;
+        }
+        table.table-tabular th,
+        table.table-tabular td,
+        .table-tabular th,
+        .table-tabular td {
+            padding: 0.5em;
+        }
+        table.table-tabular th,.table-tabular th {
+            text-align: left;
+            border-bottom: 1px solid #e3e3e3;
+        }
+        table.table-tabular td,.table-tabular td {
+            border-bottom: 1px solid #e3e3e3;
+        }
+        table.table-tabular tfoot td,.table-tabular tfoot td {
+            border-bottom-width: 0px;
+            border-top: 1px solid black;
+            padding-top: 1em;
+        }
+        .row {
+            margin: 0;
+        }
+        ${pageBreakStyles}
+        </style>
+        ${title}
+    </head>
+    <body>
+        ${joinedPages}
+    </body>
+    </html>
+    `;
 }

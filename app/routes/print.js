@@ -64,3 +64,9 @@ function orderPage(docType, order) {
       </div>
     </main>`;
 }
+
+function printHTML(pages) {
+    const title = `<title>Print Order Invoice</title>`;
+
+    return null
+}

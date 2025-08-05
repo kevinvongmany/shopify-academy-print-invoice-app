@@ -29,7 +29,14 @@ export async function loader({ request }) {
     const pages = docs.map((docType) => orderPage(docType, order));
     const print = printHTML(pages);
 
-    return null; // Placeholder for actual response handling
+    return cors(
+        new Response(print, {
+            status: 200,
+            headers: {
+                "Content-Type": "text/html",
+            },
+        })
+    );
 }
 
 function orderPage(docType, order) {

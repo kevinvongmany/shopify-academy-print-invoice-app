@@ -27,6 +27,7 @@ export async function loader({ request }) {
     const orderData = await response.json();
     const order = orderData.data.order;
     const pages = docs.map((docType) => orderPage(docType, order));
+    const print = printHTML(pages);
 
     return null; // Placeholder for actual response handling
 }
@@ -50,11 +51,11 @@ function orderPage(docType, order) {
         <div class="columns" style="margin-top: 1.5em;">
           <div class="address">
             <strong>From</strong><br>
-            Top Quality Copper Ingots<br>
-            <p>123 Broadway<br>
-              Denver CO, 80220<br>
-              United States</p>
-            (123) 456-7891<br>
+            A Strong Company<br>
+            <p>443 Barry Street<br>
+              Mascot NSW 2220<br>
+              Australia</p>
+            (02) 9994 4999<br>
           </div>
         </div>
         <hr>

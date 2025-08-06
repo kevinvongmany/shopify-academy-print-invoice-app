@@ -1,6 +1,6 @@
 {
-  "warningTitle": "Titre",
-  "warningBody": "Afficher une bannière d'avertissement lorsque le formulaire est dans un état invalide.",
+  "warningTitle": "Document manquant",
+  "warningBody": "Veuillez sélectionner au moins un document à imprimer.",
   "documents": "Documents",
   "printInvoice": "Facture",
   "printPackingSlip": "Bon de livraison"

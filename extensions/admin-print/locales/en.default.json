@@ -1,6 +1,6 @@
 {
-  "warningTitle": "Title",
-  "warningBody": "Show warning banner when form is in an invalid state.",
+  "warningTitle": "Missing document",
+  "warningBody": "Please select at least one document to print.",
   "documents": "Documents",
   "printInvoice": "Invoice",
   "printPackingSlip": "Packing Slip"

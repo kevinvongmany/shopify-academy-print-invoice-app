@@ -16,27 +16,34 @@ const TARGET = "admin.order-details.print-action.render";
 export default reactExtension(TARGET, () => <App />);
 
 function App() {
+
   // The useApi hook provides access to several useful APIs like i18n and data.
   const {i18n, data} = useApi(TARGET);
   const [src, setSrc] = useState(null);
   // It's best practice to load a printable src when first launching the extension.
   const [printInvoice, setPrintInvoice] = useState(true);
   const [printPackingSlip, setPrintPackingSlip] = useState(false);
-  // data has information about the resource to be printed.
 
-  /*
-    This template fetches static documents from the CDN to demonstrate printing.
-    However, when building your extension, you should update the src document
-    to match the resource that the user is printing. You can do this by getting the
-    resource id from the data API and using it to create a URL with a path to your app
-    that shows the correct document. For example, you might use a URL parameter to
-    render an invoice for a specific order.
-
-    `/print/invoice&orderId=${data.selected[0].id}`
-  */
   useEffect(() => {
-    const foo = "bar";
-  }, [printInvoice, printPackingSlip]);
+    const printTypes = [];
+    if (printInvoice) {
+      printTypes.push("Invoice");
+    };
+    if (printPackingSlip) {
+      printTypes.push("Packing Slip");
+    };
+
+    if (printTypes.length > 0) {
+      const params = new URLSearchParams({
+        printType: printTypes.join(","),
+        orderId: data.selected[0].id,
+      });
+      const fullSrc = `/print?${params.toString()}`;
+      setSrc(fullSrc);
+    } else {
+      setSrc(null);
+    }
+  }, [data.selected, printInvoice, printPackingSlip]);
 
   return (
     /*

@@ -7,7 +7,7 @@ export async function loader({ request }) {
     const docs = query.get("printType").split(",");
     const orderId = query.get("orderId");
     const response = await admin.graphql(
-        `query getOrder(?orderId: ID!) {
+        `query getOrder($orderId: ID!) {
         order(id: $orderId) {
             name
             createdAt

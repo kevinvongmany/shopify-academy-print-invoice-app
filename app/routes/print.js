@@ -57,7 +57,6 @@ function orderPage(docType, order) {
         </div>
         <div class="columns" style="margin-top: 1.5em;">
           <div class="address">
-            <strong>From</strong><br>
             A Strong Company<br>
             <p>443 Barry Street<br>
               Mascot NSW 2220<br>
@@ -108,7 +107,7 @@ function printHTML(pages) {
             color: #000;
         }
         main {
-            padding: 3rem 2rem;
+            padding: 0 3rem;
             height: 100vh;
         }
         h1 {

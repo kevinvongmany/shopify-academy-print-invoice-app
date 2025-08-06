@@ -59,9 +59,11 @@ function App() {
     */
     <AdminPrintAction src={src}>
       <BlockStack blockGap="base">
-        <Banner tone="warning" title={i18n.translate('warningTitle')}>
-          {i18n.translate('warningBody')}
-        </Banner>
+        { !printInvoice && !printPackingSlip && (
+          <Banner tone="warning" title={i18n.translate('warningTitle')}>
+            {i18n.translate('warningBody')}
+          </Banner>
+        )}
         <Text fontWeight="bold">{i18n.translate('documents')}</Text>
         <Checkbox
           name="Invoice"

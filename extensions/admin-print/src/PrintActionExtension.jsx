@@ -12,7 +12,6 @@ import { useEffect, useState } from "react";
 // The target used here must match the target used in the extension's toml file (./shopify.extension.toml)
 const TARGET = "admin.order-details.print-action.render";
 
-const baseSrc = `https://cdn.shopify.com/static/extensibility/print-example`;
 
 export default reactExtension(TARGET, () => <App />);
 
@@ -21,10 +20,9 @@ function App() {
   const {i18n, data} = useApi(TARGET);
   const [src, setSrc] = useState(null);
   // It's best practice to load a printable src when first launching the extension.
-  const [document1, setDocument1] = useState(true);
-  const [document2, setDocument2] = useState(false);
+  const [printInvoice, setPrintInvoice] = useState(true);
+  const [printPackingSlip, setPrintPackingSlip] = useState(false);
   // data has information about the resource to be printed.
-  console.log({ data });
 
   /*
     This template fetches static documents from the CDN to demonstrate printing.
@@ -37,16 +35,8 @@ function App() {
     `/print/invoice&orderId=${data.selected[0].id}`
   */
   useEffect(() => {
-    if (document1 && document2) {
-      setSrc(`${baseSrc}/document1-and-document2.html`);
-    } else if (document1) {
-      setSrc(`${baseSrc}/document1.html`);
-    } else if (document2) {
-      setSrc(`${baseSrc}/document2.html`);
-    } else {
-      setSrc(null);
-    }
-  }, [document1, document2]);
+    const foo = "bar";
+  }, [printInvoice, printPackingSlip]);
 
   return (
     /*
@@ -56,8 +46,8 @@ function App() {
       HTML, PDFs and images are supported.
 
       The `src` prop can be a...
-        - Full URL: https://cdn.shopify.com/static/extensibility/print-example/document1.html
-        - Relative path in your app: print-example/document1.html or /print-example/document1.html
+        - Full URL: https://cdn.shopify.com/static/extensibility/print-example/printInvoice.html
+        - Relative path in your app: print-example/printInvoice.html or /print-example/printInvoice.html
         - Custom app: protocol: app:print (https://shopify.dev/docs/api/admin-extensions#custom-protocols)
     */
     <AdminPrintAction src={src}>
@@ -68,21 +58,21 @@ function App() {
         <Text fontWeight="bold">{i18n.translate('documents')}</Text>
         <Checkbox
           name="document-1"
-          checked={document1}
+          checked={printInvoice}
           onChange={(value) => {
-            setDocument1(value);
+            setPrintInvoice(value);
           }}
         >
-         {i18n.translate('document1')}
+         {i18n.translate('printInvoice')}
         </Checkbox>
         <Checkbox
           name="document-2"
-          checked={document2}
+          checked={printPackingSlip}
           onChange={(value) => {
-            setDocument2(value);
+            setPrintPackingSlip(value);
           }}
         >
-         {i18n.translate('document2')}
+         {i18n.translate('printPackingSlip')}
         </Checkbox>
       </BlockStack>
     </AdminPrintAction>

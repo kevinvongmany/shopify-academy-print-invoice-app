@@ -64,7 +64,7 @@ function App() {
         </Banner>
         <Text fontWeight="bold">{i18n.translate('documents')}</Text>
         <Checkbox
-          name="document-1"
+          name="Invoice"
           checked={printInvoice}
           onChange={(value) => {
             setPrintInvoice(value);
@@ -73,7 +73,7 @@ function App() {
          {i18n.translate('printInvoice')}
         </Checkbox>
         <Checkbox
-          name="document-2"
+          name="Packing Slip"
           checked={printPackingSlip}
           onChange={(value) => {
             setPrintPackingSlip(value);
